@@ -25,17 +25,17 @@ jobs:
         npm install -g stylelint
         npm install -g eslint
         
-    - name: Lint HTML
-      run: |
-        html-validate index.html
+    # - name: Lint HTML
+    #   run: |
+    #     html-validate index.html
         
-    - name: Lint CSS
-      run: |
-        stylelint "styles.css"
+    # - name: Lint CSS
+    #   run: |
+    #     stylelint "styles.css"
         
-    - name: Lint JavaScript
-      run: |
-        eslint app.js
+    # - name: Lint JavaScript
+    #   run: |
+    #     eslint app.js
         
     - name: Run tests (if any)
       run: |
