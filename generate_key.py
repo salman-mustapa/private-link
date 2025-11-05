@@ -5,6 +5,7 @@ import json
 import argparse
 import getpass
 import os
+import sys  # <-- Tambahkan ini
 import requests
 
 CONFIG_FILE = 'config.json'
@@ -41,6 +42,7 @@ def hash_data(data, salt, iterations=200000):
 def initialize_master_admin():
     """Interactively create the first administrator account."""
     print("--- Inisialisasi Administrator Pertama ---")
+    sys.stdout.flush() # <-- Tambahkan ini
     config = load_config()
     if any(acc['role'] == 'administrator' for acc in config['accounts']):
         print("Akun administrator sudah ada.")
@@ -77,6 +79,7 @@ def initialize_master_admin():
 def add_account_interactive():
     """Interactively add a new user account."""
     print("\n--- Tambah Akun Baru ---")
+    sys.stdout.flush() # <-- Tambahkan ini
     config = load_config()
 
     # Get role
@@ -84,6 +87,7 @@ def add_account_interactive():
     print("1. administrator")
     print("2. dinkes")
     print("3. puskesmas")
+    sys.stdout.flush() # <-- Tambahkan ini
     role_choice = input("Masukkan pilihan (1-3): ").strip()
     role_map = {'1': 'administrator', '2': 'dinkes', '3': 'puskesmas'}
     role = role_map.get(role_choice)
@@ -130,6 +134,7 @@ def add_account_interactive():
 def add_link_interactive():
     """Interactively add a new link and assign it to accounts."""
     print("\n--- Tambah Link Baru ---")
+    sys.stdout.flush() # <-- Tambahkan ini
     config = load_config()
     
     title = input("Masukkan Judul Link: ").strip()
@@ -141,6 +146,7 @@ def add_link_interactive():
     print("\n--- Daftar Akun Tersedia ---")
     for acc in config['accounts']:
         print(f"ID: {acc['id']}, Nama: {acc['account_name']}, Role: {acc['role']}")
+    sys.stdout.flush() # <-- Tambahkan ini
     
     assigned_ids_input = input("\nMasukkan ID akun yang bisa mengakses link ini, pisahkan dengan koma (contoh: puskesmas-01, puskesmas-02): ").strip()
     assigned_ids = [id.strip() for id in assigned_ids_input.split(',') if id.strip()]
@@ -171,6 +177,7 @@ def add_link_interactive():
 def change_passphrase_interactive():
     """Interactively change passphrase for an account."""
     print("\n--- Ubah Passphrase Akun ---")
+    sys.stdout.flush() # <-- Tambahkan ini
     config = load_config()
     
     if not config['accounts']:
@@ -180,6 +187,7 @@ def change_passphrase_interactive():
     print("Pilih akun yang akan diubah passphrase-nya:")
     for i, acc in enumerate(config['accounts']):
         print(f"{i + 1}. {acc['account_name']} (ID: {acc['id']}, Role: {acc['role']})")
+    sys.stdout.flush() # <-- Tambahkan ini
     
     try:
         choice = int(input("Masukkan nomor akun: ").strip()) - 1

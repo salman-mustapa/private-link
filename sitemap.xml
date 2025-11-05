@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://salman-mustapa.github.io/private-link/</loc>
-    <lastmod>2025-11-05T10:50:53Z</lastmod>
+    <!-- GANTI DENGAN URL GITHUB PAGES ANDA -->
+    <loc>https://username.github.io/nama-repo/</loc>
+    <lastmod>2024-05-23T10:00:00Z</lastmod>
     <priority>1.0</priority>
   </url>
 </urlset>
