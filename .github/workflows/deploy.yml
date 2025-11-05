@@ -25,14 +25,11 @@ jobs:
         run: echo '${{ secrets.CONFIG_JSON_CONTENT }}' > config.json
 
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v4 # DIPERBARUI ke v4
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          # Upload semua file, termasuk config.json yang baru dibuat
-          path: '.'
+        uses: actions/upload-pages-artifact@v3 # DIPERBARUI ke v3
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4 # DIPERBARUI ke v4
