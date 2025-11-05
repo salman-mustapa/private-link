@@ -81,7 +81,7 @@
     <!-- PERBAIKAN: Mengubah <div> menjadi <div> untuk menghindari multiple landmark error -->
     <div id="loginScreen" class="flex flex-col justify-between min-h-screen p-4">
         <!-- Main content area to center the login card -->
-        <div class="flex items-center justify-center flex-grow" aria-label="Form Login">
+        <div class="flex items-center justify-center flex-grow">
             <div class="w-full max-w-md p-8 space-y-8 bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 animate-fade-in">
                 <div class="text-center">
                     <i class="fas fa-shield-alt text-6xl text-blue-600 dark:text-blue-400 mb-4"></i>
@@ -129,8 +129,7 @@
                     <div class="flex items-center space-x-4 w-full sm:w-auto">
                         <input type="text" id="searchInput" placeholder="Cari link..." class="flex-grow sm:flex-grow-0 px-3 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm">
                         <span id="userInfo" class="text-sm font-medium whitespace-nowrap"></span>
-                        <!-- PERBAIKAN: Menambahkan type="button" dan aria-label -->
-                        <button id="lockBtn" type="button" class="p-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-600 dark:text-red-400 transition" aria-label="Kunci Vault">
+                        <button id="lockBtn" type="button" class="p-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-600 dark:text-red-400 transition">
                             <i class="fas fa-lock"></i>
                         </button>
                     </div>
@@ -169,8 +168,7 @@
             <div class="flex justify-between items-start mb-4">
                 <!-- PERBAIKAN: Menambahkan placeholder non-breaking space -->
                 <h2 id="modalTitle" class="text-2xl font-bold">&nbsp;</h2>
-                <!-- PERBAIKAN: Menambahkan type="button" dan aria-label -->
-                <button id="closeModal" type="button" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" aria-label="Tutup Modal">
+                <button id="closeModal" type="button" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
