@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Larang akses ke file konfigurasi sensitif
+Disallow: /config.json
+
+# Beritahu lokasi sitemap
+# GANTI DENGAN URL GITHUB PAGES ANDA
+Sitemap: https://salman-mustapa.github.io/private-link/sitemap.xml

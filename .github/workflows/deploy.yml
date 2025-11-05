@@ -19,15 +19,6 @@ jobs:
       - name: Create config.json from secret
         run: echo '${{ secrets.CONFIG_JSON_CONTENT }}' > config.json
 
-      # --- TAMBAHAN: Buat sitemap.xml dan robots.txt ---
-      - name: Generate sitemap.xml and robots.txt
-        run: |
-          # Buat sitemap.xml
-          echo -e "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n  <url>\n    <loc>https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/</loc>\n    <lastmod>$(date -u +%Y-%m-%dT%H:%M:%SZ)</lastmod>\n    <priority>1.0</priority>\n  </url>\n</urlset>" > sitemap.xml
-          
-          # Buat robots.txt
-          echo -e "User-agent: *\nAllow: /\n\n# Larang akses ke file konfigurasi sensitif\n\n# Beritahu lokasi sitemap\nSitemap: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/sitemap.xml" > robots.txt
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
