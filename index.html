@@ -3,10 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Private Akses Link</title>
+    
+    <!-- Meta Tags untuk SEO -->
+    <meta name="author" content="Nama Anda / Organisasi Anda">
+    <meta name="description" content="Private Access Link - Sistem manajemen link aman berbasis peran untuk mengelola sumber daya digital dengan efisien.">
+    <meta name="keywords" content="access link, bookmark manager, private links, role-based access, keamanan data, manajemen link">
+    
+    <!-- Meta Tags Keamanan -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- Open Graph / Social Media Preview -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Private Access Link">
+    <meta property="og:description" content="Sistem manajemen link aman berbasis peran untuk mengelola sumber daya digital.">
+    <meta property="og:url" content="https://username.github.io/nama-repo/">
+    <meta property="og:image" content="https://username.github.io/nama-repo/assets/img/preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Private Access Link">
+    <meta name="twitter:description" content="Sistem manajemen link aman berbasis peran untuk mengelola sumber daya digital.">
+    <meta name="twitter:image" content="https://username.github.io/nama-repo/assets/img/preview.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+
+    <title>Private Access Link</title>
+    
+    <!-- Performance Hints: preconnect dan dns-prefetch -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+    <!-- Non-render-blocking CSS -->
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -25,16 +69,33 @@
             }
         }
     </script>
+
+    <!-- Google Tag (gtag.js) - GANTI DENGAN ID ANDA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QNV3SL7HLW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QNV3SL7HLW', {
+        'custom_map': {'dimension1': 'site_name'}
+      });
+
+      gtag('event', 'page_view', {
+        'site_name': 'Salman Mustapa Portfolio'
+      });
+    </script>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 min-h-screen text-gray-900 dark:text-gray-100 flex flex-col">
     <!-- Login Screen -->
+    <!-- PERBAIKAN: Mengubah <main> menjadi <div> untuk menghindari multiple landmark error -->
     <div id="loginScreen" class="flex flex-col justify-between min-h-screen p-4">
         <!-- Main content area to center the login card -->
-        <main class="flex items-center justify-center flex-grow">
+        <main class="flex items-center justify-center flex-grow" aria-label="Form Login">
             <div class="w-full max-w-md p-8 space-y-8 bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 animate-fade-in">
                 <div class="text-center">
                     <i class="fas fa-shield-alt text-6xl text-blue-600 dark:text-blue-400 mb-4"></i>
-                    <h1 class="text-3xl font-bold">Private Akses Link </h1>
+                    <h1 class="text-3xl font-bold">Private Access Link</h1>
                     <p class="mt-2 text-gray-600 dark:text-gray-400">Masuk untuk mengakses link Anda</p>
                 </div>
                 <form id="loginForm" class="space-y-6">
@@ -59,9 +120,9 @@
 
         <!-- Footer dengan Tombol Kontak -->
         <footer class="text-center text-gray-600 dark:text-gray-400 py-4">
-            <p>&copy; 2025 - Salman Mustapa</p>
+            <p>&copy; 2024 Private Access Link</p>
             <a href="mailto:salmanmustapa@outlook.com" class="inline-block mt-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow transition duration-200">
-                <i class="fas fa-envelope mr-2"></i>Hubungi Salman Mustapa
+                <i class="fas fa-envelope mr-2"></i>Hubungi Kami
             </a>
         </footer>
     </div>
@@ -73,12 +134,13 @@
             <div class="px-4 sm:px-6 lg:px-8 py-4">
                 <div class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
                     <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                        <i class="fas fa-link mr-2"></i>Private Akses Link
+                        <i class="fas fa-link mr-2"></i>Access Link
                     </h1>
                     <div class="flex items-center space-x-4 w-full sm:w-auto">
                         <input type="text" id="searchInput" placeholder="Cari link..." class="flex-grow sm:flex-grow-0 px-3 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm">
                         <span id="userInfo" class="text-sm font-medium whitespace-nowrap"></span>
-                        <button id="lockBtn" class="p-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-600 dark:text-red-400 transition">
+                        <!-- PERBAIKAN: Menambahkan type="button" dan aria-label -->
+                        <button id="lockBtn" type="button" class="p-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-600 dark:text-red-400 transition" aria-label="Kunci Vault">
                             <i class="fas fa-lock"></i>
                         </button>
                     </div>
@@ -115,8 +177,10 @@
     <div id="linkModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full p-6 animate-slide-up">
             <div class="flex justify-between items-start mb-4">
-                <h2 id="modalTitle" class="text-2xl font-bold"></h2>
-                <button id="closeModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                <!-- PERBAIKAN: Menambahkan placeholder non-breaking space -->
+                <h2 id="modalTitle" class="text-2xl font-bold">&nbsp;</h2>
+                <!-- PERBAIKAN: Menambahkan type="button" dan aria-label -->
+                <button id="closeModal" type="button" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" aria-label="Tutup Modal">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
@@ -133,7 +197,25 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <script src="app.js"></script>
+    <!-- Non-render-blocking JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" defer></script>
+    <script src="app.js" defer></script>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Private Access Link",
+      "description": "Sistem manajemen link aman berbasis peran untuk mengelola sumber daya digital dengan efisien.",
+      "url": "https://username.github.io/nama-repo/",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      }
+    }
+    </script>
 </body>
 </html>
