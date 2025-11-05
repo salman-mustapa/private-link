@@ -30,7 +30,7 @@ def generate_salt():
     """Generate a random salt."""
     return secrets.token_hex(16)
 
-def hash_data(data, salt, iterations=200000):
+def hash_data(data, salt, iterations=2000):
     """Derive a hash from data using PBKDF2."""
     return hashlib.pbkdf2_hmac(
         'sha256',

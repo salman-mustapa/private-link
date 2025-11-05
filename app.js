@@ -78,11 +78,11 @@ function handleLogin(e) {
     setTimeout(() => {
         const account = allConfig.accounts.find(acc => {
             const hashedUsername = CryptoJS.PBKDF2(username, CryptoJS.enc.Hex.parse(acc.salt), {
-                keySize: 256/32, iterations: 200000, hasher: CryptoJS.algo.SHA256
+                keySize: 256/32, iterations: 2000, hasher: CryptoJS.algo.SHA256
             }).toString();
             
             const hashedPassphrase = CryptoJS.PBKDF2(passphrase, CryptoJS.enc.Hex.parse(acc.salt), {
-                keySize: 256/32, iterations: 200000, hasher: CryptoJS.algo.SHA256
+                keySize: 256/32, iterations: 2000, hasher: CryptoJS.algo.SHA256
             }).toString();
 
             return hashedUsername === acc.username_hash && hashedPassphrase === acc.passphrase_hash;
