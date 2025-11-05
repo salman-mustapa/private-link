@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Larang akses ke file konfigurasi sensitif
+
+# Beritahu lokasi sitemap
+Sitemap: https://salman-mustapa.github.io/private-link/sitemap.xml
