@@ -1,0 +1,94 @@
+{
+  "masterCredentials": {},
+  "accounts": [
+    {
+      "id": "s4lm4n",
+      "role": "administrator",
+      "account_name": "Salman Mustapa",
+      "username_hash": "418958f4785ec12265c3ef87449b30bb595255429947078db3437a8456e921fa",
+      "passphrase_hash": "370115a2d1544b7ad81d37dbf727b87fa5d782f0a096a45c0bea8fa747745e4f",
+      "salt": "9644eab19d18df199a6a9a0bb3bd0cad"
+    },
+    {
+      "id": "farida",
+      "role": "dinkes",
+      "account_name": "Farida Muchtar",
+      "username_hash": "0be0b62e528ea37baa8fda39472155a3ca97b69bdd2e5ff0503eaab017c313ea",
+      "passphrase_hash": "0be0b62e528ea37baa8fda39472155a3ca97b69bdd2e5ff0503eaab017c313ea",
+      "salt": "8e36c42763e528b62650dbbc12ffdde2"
+    },
+    {
+      "id": "kotbar",
+      "role": "puskesmas",
+      "account_name": "Puskesmas Kota Barat",
+      "username_hash": "4064874dc2981c051f17fcf41bf799d1d78d5dc79a7dd8eff9a11558932820ca",
+      "passphrase_hash": "4064874dc2981c051f17fcf41bf799d1d78d5dc79a7dd8eff9a11558932820ca",
+      "salt": "836177866cc37e6cd3194c0f880a857f"
+    },
+    {
+      "id": "kotim",
+      "role": "puskesmas",
+      "account_name": "Puskesmas Kota Timur",
+      "username_hash": "cc439355ef440406b092bb6a676096cfdd6f584237aa5188ccc71f04f69d8a43",
+      "passphrase_hash": "cc439355ef440406b092bb6a676096cfdd6f584237aa5188ccc71f04f69d8a43",
+      "salt": "6ab45bb43f7a45e359e3267688783afa"
+    },
+    {
+      "id": "pilolodaa",
+      "role": "puskesmas",
+      "account_name": "Puskesmas Pilolodaa",
+      "username_hash": "9d53aab171820a83826c3505435e4dc866c44bcc0f910b125e0db1685ed2a925",
+      "passphrase_hash": "9d53aab171820a83826c3505435e4dc866c44bcc0f910b125e0db1685ed2a925",
+      "salt": "6eb75646e5844a46f322ec02dea74892"
+    },
+    {
+      "id": "kotsel",
+      "role": "puskesmas",
+      "account_name": "Puskesmas Kota Selatan",
+      "username_hash": "f4fb9617e0d12018d0bbafb6fbcc629d6c9541cba448303e045d664421798bfb",
+      "passphrase_hash": "f4fb9617e0d12018d0bbafb6fbcc629d6c9541cba448303e045d664421798bfb",
+      "salt": "bec46cf36d5a0fec41545da3395584c0"
+    },
+    {
+      "id": "kout",
+      "role": "puskesmas",
+      "account_name": "Puskesmas Kota Utara",
+      "username_hash": "b612d16adf311938b57281658a74ce1c38cc5badca89641b97382a23e388351c",
+      "passphrase_hash": "b612d16adf311938b57281658a74ce1c38cc5badca89641b97382a23e388351c",
+      "salt": "66a9e2ef8ca88aebd09c0899c8c44cf8"
+    },
+    {
+      "id": "koteng",
+      "role": "puskesmas",
+      "account_name": "Puskesmas Kota Tengah",
+      "username_hash": "d380e95d0f8baf66af0803f9d334d6a333e42c960973d341783585a640871ead",
+      "passphrase_hash": "d380e95d0f8baf66af0803f9d334d6a333e42c960973d341783585a640871ead",
+      "salt": "e09e5e18f55e1b64b96356c882f52e20"
+    },
+    {
+      "id": "dumbor",
+      "role": "puskesmas",
+      "account_name": "Puskesmas Dumbo Raya",
+      "username_hash": "f5268368fe610f6505c272be0b94822c267a686de3f3231bdd293b14d1fb67ed",
+      "passphrase_hash": "f5268368fe610f6505c272be0b94822c267a686de3f3231bdd293b14d1fb67ed",
+      "salt": "94312bb62b4af9c27704418e625c36d4"
+    },
+    {
+      "id": "hulon",
+      "role": "puskesmas",
+      "account_name": "Puskesmas Hulonthalangi",
+      "username_hash": "aba3da12c9069d29786f46d74a3587cd308991fbbfb12d650cda9c0bf00cc106",
+      "passphrase_hash": "aba3da12c9069d29786f46d74a3587cd308991fbbfb12d650cda9c0bf00cc106",
+      "salt": "0ea9b306aa1348d2e73a1849440cbc18"
+    },
+    {
+      "id": "sipatana",
+      "role": "puskesmas",
+      "account_name": "Puskesmas Sipatana",
+      "username_hash": "2693cd1c8237fb07fe32271c85d2090c8f9d8842aaa8aae902412886cd04b9fb",
+      "passphrase_hash": "2693cd1c8237fb07fe32271c85d2090c8f9d8842aaa8aae902412886cd04b9fb",
+      "salt": "7b0b75690c783457d4b17e2a93bc17e4"
+    }
+  ],
+  "links": []
+}

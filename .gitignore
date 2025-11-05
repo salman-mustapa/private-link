@@ -39,5 +39,3 @@ pids
 .env.test
 .env.local
 .env.production
-
-config.json
