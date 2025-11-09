@@ -30,6 +30,9 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Non-render-blocking CSS -->
     <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="styles.css"></noscript>
@@ -73,11 +76,9 @@
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 min-h-screen text-gray-900 dark:text-gray-100 flex flex-col">
     <!-- Login Screen -->
-    <!-- PERBAIKAN: Mengubah <div> menjadi <div> untuk menghindari multiple landmark error -->
     <div id="loginScreen" class="flex flex-col justify-between min-h-screen p-4">
-        <!-- Main content area to center the login card -->
-        <div class="flex items-center justify-center flex-grow">
-            <div class="w-full max-w-md p-8 space-y-8 bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 animate-fade-in">
+        <main class="flex items-center justify-center flex-grow">
+            <div class="w-full max-w-md p-8 space-y-8 glass rounded-2xl shadow-xl">
                 <div class="text-center">
                     <i class="fas fa-shield-alt text-6xl text-blue-600 dark:text-blue-400 mb-4"></i>
                     <h1 class="text-3xl font-bold">Private Access Link</h1>
@@ -92,92 +93,608 @@
                         <label for="passphrase" class="block text-sm font-medium">Passphrase</label>
                         <input type="password" id="passphrase" class="mt-1 block w-full px-3 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm">
                     </div>
-                    <div id="loginError" class="hidden p-3 bg-red-100/80 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-md backdrop-blur-sm animate-slide-up">
+                    <div id="loginError" class="hidden p-3 bg-red-100/80 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-md backdrop-blur-sm">
                         <i class="fas fa-exclamation-circle mr-2"></i>
                         <span>Username atau passphrase salah.</span>
                     </div>
-                    <button type="submit" id="loginButton" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200 transform hover:scale-105">
+                    <button type="submit" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200">
                         <i class="fas fa-sign-in-alt mr-2"></i>Masuk
                     </button>
                 </form>
             </div>
-        </div>
-
-        <!-- Footer dengan Tombol Kontak -->
+        </main>
+        <!-- Footer di Halaman Login -->
         <footer class="text-center text-gray-600 dark:text-gray-400 py-4">
-            <p>&copy; 2024 Private Access Link</p>
-            <a href="mailto:salmanmustapa@outlook.com" class="inline-block mt-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow transition duration-200">
-                <i class="fas fa-envelope mr-2"></i>Hubungi Saya - Salman Mustapa
-            </a>
+            <p>&copy; 2025 - <a href="https://salman-mustapa.github.io" target="_blank" class="hover:underline">Salman Mustapa</a></p>
+            <button id="contactLoginBtn" class="mt-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow transition duration-200">
+                <i class="fas fa-envelope mr-2"></i>Hubungi Kami
+            </button>
         </footer>
     </div>
 
     <!-- Main App -->
     <div id="mainApp" class="hidden h-full flex flex-col">
         <!-- Header -->
-        <header class="bg-white/70 dark:bg-gray-800/70 backdrop-blur-lg shadow-md z-10 border-b border-white/20 dark:border-gray-700/50">
+        <header class="glass shadow-md z-10 border-b border-white/20 dark:border-gray-700/50">
             <div class="px-4 sm:px-6 lg:px-8 py-4">
                 <div class="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
                     <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                        <i class="fas fa-link mr-2"></i>Access Link
+                        <i class="fas fa-link mr-2"></i>Private Access Link
                     </h1>
                     <div class="flex items-center space-x-4 w-full sm:w-auto">
-                        <input type="text" id="searchInput" placeholder="Cari link..." class="flex-grow sm:flex-grow-0 px-3 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm">
                         <span id="userInfo" class="text-sm font-medium whitespace-nowrap"></span>
-                        <button id="lockBtn" type="button" class="p-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-600 dark:text-red-400 transition">
+                        <button id="profileBtn" class="hidden md:block p-2 rounded-lg bg-gray-500/20 hover:bg-gray-500/30 text-gray-600 dark:text-gray-400 transition">
+                            <i class="fas fa-user"></i>
+                        </button>
+                        <button id="lockBtn" class="hidden md:block p-2 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-600 dark:text-red-400 transition">
                             <i class="fas fa-lock"></i>
                         </button>
                     </div>
                 </div>
-                <!-- Filter Kategori -->
-                <div id="categoryFilters" class="mt-4 flex flex-wrap gap-2">
-                    <!-- Filter badge akan ditambahkan di sini oleh JS -->
+                <!-- Admin Navigation -->
+                <div id="adminNav" class="hidden mt-4">
+                    <div class="flex space-x-2">
+                        <button id="showHomeView" class="px-3 py-1 bg-blue-500 text-white rounded-lg">
+                            <i class="fas fa-home mr-2"></i>Home
+                        </button>
+                        <button id="showLinksView" class="px-3 py-1 bg-gray-400 text-white rounded-lg">Links</button>
+                        <button id="showAccountsView" class="px-3 py-1 bg-gray-400 text-white rounded-lg">Accounts</button>
+                    </div>
+                </div>
+                <!-- User Actions (Desktop) -->
+                <div id="userActions" class="hidden mt-4 flex justify-end">
+                    <button id="addLinkBtn" class="hidden md:block px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition">
+                        <i class="fas fa-plus mr-2"></i>Tambah Link
+                    </button>
                 </div>
             </div>
         </header>
 
         <!-- Main Content -->
-        <div class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
-            <div id="linksContainer" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                <!-- Link cards will be dynamically inserted here -->
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 pb-20 md:pb-8">
+            <!-- Admin Home View -->
+            <div id="adminHomeView" class="hidden space-y-4">
+                <h2 class="text-2xl font-semibold">Dashboard Admin</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="glass p-6 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                                <i class="fas fa-link text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Total Links</p>
+                                <p class="text-xl font-semibold" id="totalLinks">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass p-6 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400">
+                                <i class="fas fa-users text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Total Accounts</p>
+                                <p class="text-xl font-semibold" id="totalAccounts">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass p-6 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+                                <i class="fas fa-user-shield text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Admin Accounts</p>
+                                <p class="text-xl font-semibold" id="adminAccounts">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass p-6 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">Last Update</p>
+                                <p class="text-xl font-semibold" id="lastUpdate">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="noLinksMessage" class="hidden text-center py-12">
-                <i class="fas fa-inbox text-6xl text-gray-300 dark:text-gray-600 mb-4"></i>
-                <p class="text-xl text-gray-500 dark:text-gray-400">Tidak ada link yang dapat ditampilkan untuk akun Anda.</p>
+
+            <!-- Admin Table Views -->
+            <div id="adminLinksView" class="hidden space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <h2 class="text-2xl font-semibold">Manajemen Link</h2>
+                    <button id="addLinkBtnAdmin" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition">
+                        <i class="fas fa-plus mr-2"></i>Tambah Link
+                    </button>
+                </div>
+                <!-- Search & Filter (Hanya untuk admin links view) -->
+                <div class="flex flex-col sm:flex-row gap-4 admin-only">
+                    <input type="text" id="searchInputAdmin" placeholder="Cari link..." class="flex-grow px-3 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm">
+                    <select id="categoryFilterAdmin" class="px-3 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm">
+                        <option value="">Semua Kategori</option>
+                    </select>
+                </div>
+                <div class="overflow-x-auto glass rounded-lg shadow">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Judul</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">URL</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Kategori</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Diakses Oleh</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Dibuat Oleh</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="linksTableBody" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            <!-- Data akan diisi oleh JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Pagination -->
+                <div id="linksPagination" class="flex justify-center items-center space-x-2 mt-4">
+                    <!-- Pagination controls akan ditambahkan di sini oleh JS -->
+                </div>
             </div>
+
+            <div id="adminAccountsView" class="hidden space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <h2 class="text-2xl font-semibold">Manajemen Akun</h2>
+                    <button id="addAccountBtnAdmin" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition">
+                        <i class="fas fa-user-plus mr-2"></i>Tambah Akun Baru
+                    </button>
+                </div>
+                <!-- Search & Filter (Hanya untuk admin accounts view) -->
+                <div class="flex flex-col sm:flex-row gap-4 admin-only">
+                    <input type="text" id="searchInputAccounts" placeholder="Cari akun..." class="flex-grow px-3 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm">
+                    <select id="roleFilterAccounts" class="px-3 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm">
+                        <option value="">Semua Role</option>
+                        <option value="administrator">Administrator</option>
+                        <option value="dinkes">Dinkes</option>
+                        <option value="puskesmas">Puskesmas</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+                <div class="overflow-x-auto glass rounded-lg shadow">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Nama Akun</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Role</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">ID</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="accountsTableBody" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            <!-- Data akan diisi oleh JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- User Grid View -->
+            <div id="userGridView" class="hidden space-y-4">
+                <!-- Search & Filter -->
+                <div class="mb-4 flex flex-col sm:flex-row gap-4">
+                    <input type="text" id="searchInput" placeholder="Cari link..." class="flex-grow px-3 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm">
+                    <div class="relative">
+                        <button id="categoryDropdownBtn" class="px-4 py-2 bg-white/50 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 backdrop-blur-sm flex items-center">
+                            <span id="selectedCategory">Semua Kategori</span>
+                            <i class="fas fa-chevron-down ml-2"></i>
+                        </button>
+                        <div id="categoryDropdown" class="hidden absolute top-10 right-0 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg shadow-lg z-10 min-w-[200px] max-h-64 overflow-y-auto">
+                            <div class="p-2">
+                                <button class="category-filter-btn w-full text-left px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded" data-category="Semua">Semua Kategori</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="linksContainer" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    <!-- Link cards will be dynamically inserted here -->
+                </div>
+                <div id="noLinksMessage" class="hidden text-center py-12">
+                    <i class="fas fa-inbox text-6xl text-gray-300 dark:text-gray-600 mb-4"></i>
+                    <p class="text-xl text-gray-500 dark:text-gray-400">Tidak ada link yang dapat ditampilkan.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bottom Navigation (Mobile) -->
+    <nav id="bottomNav" class="hidden fixed bottom-0 left-0 right-0 glass shadow-md z-10 border-t border-white/20 dark:border-gray-700/50 md:hidden">
+        <div class="flex justify-around">
+            <button id="mobileAddLink" class="flex flex-col items-center py-2 px-3 text-gray-700 dark:text-gray-200">
+                <i class="fas fa-plus text-xl"></i>
+                <span class="text-xs mt-1">Tambah</span>
+            </button>
+            <button id="mobileProfile" class="flex flex-col items-center py-2 px-3 text-gray-700 dark:text-gray-200">
+                <i class="fas fa-user text-xl"></i>
+                <span class="text-xs mt-1">Profil</span>
+            </button>
+            <button id="mobileLock" class="flex flex-col items-center py-2 px-3 text-gray-700 dark:text-gray-200">
+                <i class="fas fa-lock text-xl"></i>
+                <span class="text-xs mt-1">Kunci</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Loader -->
+    <div id="loader" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 flex flex-col items-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+            <p class="text-gray-700 dark:text-gray-300">Memproses data...</p>
         </div>
     </div>
 
-    <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
-        <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl text-center">
-            <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin-slow mx-auto mb-4"></div>
-            <p class="text-lg font-medium">Sedang memverifikasi...</p>
-            <p class="text-sm text-gray-500 dark:text-gray-400">Mohon tunggu sebentar.</p>
+    <!-- Modals -->
+    <!-- Add Link Modal -->
+    <div id="addLinkModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+        <div class="glass rounded-xl shadow-2xl max-w-2xl w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-white">Tambah Link Baru</h2>
+                <button class="modal-close text-white hover:text-white dark:text-white dark:hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="addLinkForm" class="space-y-4">
+                <div>
+                    <label for="linkTitle" class="block text-white text-sm font-medium">Judul <span class="text-red-500">*</span></label>
+                    <input type="text" id="linkTitle" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="linkUrl" class="block text-white text-sm font-medium">URL <span class="text-red-500">*</span></label>
+                    <input type="url" id="linkUrl" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="linkImageUrl" class="block text-white text-sm font-medium">URL Gambar</label>
+                    <input type="url" id="linkImageUrl" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="linkCategory" class="block text-white text-sm font-medium">Kategori <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                        <input type="text" id="linkCategory" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                        <button type="button" id="categoryToggle" class="absolute right-2 top-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div id="categorySuggestions" class="hidden absolute z-10 w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg mt-1 max-h-40 overflow-y-auto">
+                        <!-- Category suggestions will be added here -->
+                    </div>
+                </div>
+                <div>
+                    <label for="linkNotes" class="block text-white text-sm font-medium">Catatan</label>
+                    <textarea id="linkNotes" rows="3" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"></textarea>
+                </div>
+                <!-- Admin Assignment -->
+                <div id="adminAssignment" class="hidden space-y-2">
+                    <label class="block text-white text-sm font-medium">Tugaskan ke Akun</label>
+                    <div id="multiSelectContainer" class="border border-gray-300 dark:border-gray-600 rounded-md p-2 max-h-32 overflow-y-auto dark:bg-gray-700">
+                        <!-- Checkboxes will be dynamically added here -->
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" class="modal-close px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-md">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Link Modal -->
+    <div id="editLinkModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+        <div class="glass rounded-xl shadow-2xl max-w-2xl w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-white">Edit Link</h2>
+                <button class="modal-close text-white hover:text-white dark:text-white dark:hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="editLinkForm" class="space-y-4">
+                <input type="hidden" id="editLinkId">
+                <div>
+                    <label for="editLinkTitle" class="block text-white text-sm font-medium">Judul <span class="text-red-500">*</span></label>
+                    <input type="text" id="editLinkTitle" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="editLinkUrl" class="block text-white text-sm font-medium">URL <span class="text-red-500">*</span></label>
+                    <input type="url" id="editLinkUrl" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="editLinkImageUrl" class="block text-white text-sm font-medium">URL Gambar</label>
+                    <input type="url" id="editLinkImageUrl" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="editLinkCategory" class="block text-white text-sm font-medium">Kategori <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                        <input type="text" id="editLinkCategory" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                        <button type="button" id="editCategoryToggle" class="absolute right-2 top-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div id="editCategorySuggestions" class="hidden absolute z-10 w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg mt-1 max-h-40 overflow-y-auto">
+                        <!-- Category suggestions will be added here -->
+                    </div>
+                </div>
+                <div>
+                    <label for="editLinkNotes" class="block text-white text-sm font-medium">Catatan</label>
+                    <textarea id="editLinkNotes" rows="3" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700"></textarea>
+                </div>
+                <!-- Admin Assignment -->
+                <div id="editAdminAssignment" class="hidden space-y-2">
+                    <label class="block text-white text-sm font-medium">Tugaskan ke Akun</label>
+                    <div id="editMultiSelectContainer" class="border border-gray-300 dark:border-gray-600 rounded-md p-2 max-h-32 overflow-y-auto dark:bg-gray-700">
+                        <!-- Checkboxes will be dynamically added here -->
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" class="modal-close px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-md">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md">Update</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <!-- Link Detail Modal -->
-    <div id="linkModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-2xl w-full p-6 animate-slide-up">
-            <div class="flex justify-between items-start mb-4">
-                <!-- PERBAIKAN: Menambahkan placeholder non-breaking space -->
-                <h2 id="modalTitle" class="text-2xl font-bold">&nbsp;</h2>
-                <button id="closeModal" type="button" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+    <div id="linkDetailModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+    
+        <div class="glass rounded-xl shadow-2xl max-w-2xl w-full p-6 flex flex-col max-h-[90vh]">
+            
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-white">Detail Link</h2>
+                <button class="modal-close text-white hover:text-white dark:text-white dark:hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-            <div id="modalImageContainer" class="mb-4 rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-700 h-48 flex items-center justify-center">
-                <!-- Image will be inserted here -->
+    
+            <div class="space-y-4 flex-1 overflow-y-auto min-h-0 pr-2">
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Judul</h3>
+                    <p id="detailTitle" class="text-gray-300 dark:text-gray-400"></p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2">URL</h3>
+                    <a id="detailUrl" href="#" target="_blank" class="text-blue-400 hover:text-blue-300 underline"></a>
+                </div>
+                <div id="detailImageContainer" class="hidden">
+                    <h3 class="text-lg font-semibold text-white mb-2">Gambar</h3>
+                    <img id="detailImage" src="" alt="Link Image" class="max-w-full rounded-lg">
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Kategori</h3>
+                    <p id="detailCategory" class="text-gray-300 dark:text-gray-400"></p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Catatan</h3>
+                    <p id="detailNotes" class="text-gray-300 dark:text-gray-400 whitespace-pre-wrap"></p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Diakses Oleh</h3>
+                    <p id="detailAssigned" class="text-gray-300 dark:text-gray-400"></p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Dibuat Oleh</h3>
+                    <p id="detailCreatedBy" class="text-gray-300 dark:text-gray-400"></p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Dibuat Pada</h3>
+                    <p id="detailCreatedAt" class="text-gray-300 dark:text-gray-400"></p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Terakhir Diupdate</h3>
+                    <p id="detailLastUpdate" class="text-gray-300 dark:text-gray-400"></p>
+                </div>
             </div>
-            <p id="modalUrl" class="mb-2"></p>
-            <p id="modalNotes" class="text-gray-600 dark:text-gray-400"></p>
-            <div class="mt-6">
-                <a id="modalVisitLink" href="#" target="_blank" class="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition">
-                    <i class="fas fa-external-link-alt mr-2"></i>Kunjungi Link
+    
+            <div class="flex justify-end space-x-3 pt-6">
+                <button id="detailEditBtn" class="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white font-medium rounded-md">
+                    <i class="fas fa-edit mr-2"></i>Edit
+                </button>
+                <button id="detailDeleteBtn" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md">
+                    <i class="fas fa-trash mr-2"></i>Hapus
+                </button>
+                <button class="modal-close px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-md">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+        <div class="glass rounded-xl shadow-2xl max-w-md w-full p-6">
+            <div class="flex items-center mb-4">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                    <i class="fas fa-exclamation-triangle text-red-600 dark:text-red-400"></i>
+                </div>
+                <div class="ml-4">
+                    <h2 class="text-xl font-bold text-white">Konfirmasi Hapus</h2>
+                    <p class="text-gray-300 dark:text-gray-400">Apakah Anda yakin ingin menghapus item ini? Tindakan ini tidak dapat dibatalkan.</p>
+                </div>
+            </div>
+            <div class="flex justify-end space-x-3">
+                <button id="cancelDelete" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-md">Batal</button>
+                <button id="confirmDelete" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Account Modal (Admin Only) -->
+    <div id="addAccountModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+        <div class="glass rounded-xl shadow-2xl max-w-lg w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-white">Tambah Akun Baru</h2>
+                <button class="modal-close text-white hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="addAccountForm" class="space-y-4">
+                <div>
+                    <label for="accountId" class="block text-sm font-medium text-white">ID Akun <span class="text-red-500">*</span></label>
+                    <input type="text" id="accountId" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="accountName" class="block text-sm font-medium text-white">Nama Akun <span class="text-red-500">*</span></label>
+                    <input type="text" id="accountName" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="accountRole" class="block text-sm font-medium text-white">Role <span class="text-red-500">*</span></label>
+                    <select id="accountRole" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                        <option value="user">User</option>
+                        <option value="puskesmas">Puskesmas</option>
+                        <option value="dinkes">Dinkes</option>
+                        <option value="administrator">Administrator</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="accountUsername" class="block text-sm font-medium text-white">Username <span class="text-red-500">*</span></label>
+                    <input type="text" id="accountUsername" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="accountPassphrase" class="block text-sm font-medium text-white">Passphrase <span class="text-red-500">*</span></label>
+                    <input type="password" id="accountPassphrase" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                 <div class="flex justify-end space-x-3">
+                    <button type="button" class="modal-close px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-md">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-md">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Account Modal (Admin Only) -->
+    <div id="editAccountModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+        <div class="glass rounded-xl shadow-2xl max-w-lg w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-white">Edit Akun</h2>
+                <button class="modal-close text-white hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="editAccountForm" class="space-y-4">
+                <input type="hidden" id="editAccountId">
+                <div>
+                    <label for="editAccountName" class="block text-sm font-medium text-white">Nama Akun <span class="text-red-500">*</span></label>
+                    <input type="text" id="editAccountName" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="editAccountRole" class="block text-sm font-medium text-white">Role <span class="text-red-500">*</span></label>
+                    <select id="editAccountRole" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                        <option value="user">User</option>
+                        <option value="puskesmas">Puskesmas</option>
+                        <option value="dinkes">Dinkes</option>
+                        <option value="administrator">Administrator</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="editAccountUsername" class="block text-sm font-medium text-white">Username <span class="text-red-500">*</span></label>
+                    <input type="text" id="editAccountUsername" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="editAccountPassphrase" class="block text-sm font-medium text-white">Passphrase (Kosongkan jika tidak ingin mengubah)</label>
+                    <input type="password" id="editAccountPassphrase" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                 <div class="flex justify-end space-x-3">
+                    <button type="button" class="modal-close px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-md">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-md">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+        <div class="glass rounded-xl shadow-2xl max-w-lg w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-white">Profil Saya</h2>
+                <button class="modal-close text-white hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="profileForm" class="space-y-4">
+                <input type="hidden" id="profileAccountId">
+                <div>
+                    <label for="profileAccountName" class="block text-sm font-medium text-white">Nama Akun <span class="text-red-500">*</span></label>
+                    <input type="text" id="profileAccountName" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="profileAccountUsername" class="block text-sm font-medium text-white">Username <span class="text-red-500">*</span></label>
+                    <input type="text" id="profileAccountUsername" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="profileCurrentPassphrase" class="block text-sm font-medium text-white">Passphrase Saat Ini <span class="text-red-500">*</span></label>
+                    <input type="password" id="profileCurrentPassphrase" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="profileNewPassphrase" class="block text-sm font-medium text-white">Passphrase Baru (Kosongkan jika tidak ingin mengubah)</label>
+                    <input type="password" id="profileNewPassphrase" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="profileConfirmPassphrase" class="block text-sm font-medium text-white">Konfirmasi Passphrase Baru</label>
+                    <input type="password" id="profileConfirmPassphrase" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                 <div class="flex justify-end space-x-3">
+                    <button type="button" class="modal-close px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-md">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-md">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Re-auth Modal -->
+    <div id="reauthModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+        <div class="glass rounded-xl shadow-2xl max-w-md w-full p-6">
+            <h2 class="text-2xl font-bold mb-4 text-white">Konfirmasi Identitas</h2>
+            <p class="text-white dark:text-white mb-4">Untuk menambah data, masukkan kembali username dan passphrase Anda.</p>
+            <form id="reauthForm" class="space-y-4">
+                 <div>
+                    <label for="reauthUsername" class="block text-sm font-medium text-white">Username</label>
+                    <input type="text" id="reauthUsername" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div>
+                    <label for="reauthPassphrase" class="block text-sm font-medium text-white">Passphrase</label>
+                    <input type="password" id="reauthPassphrase" required class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">
+                </div>
+                <div id="reauthError" class="hidden p-3 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 rounded-md">
+                    Kredensial tidak valid.
+                </div>
+                 <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancelReauth" class="px-4 py-2 bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-md">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md">Konfirmasi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-40 flex items-center justify-center p-4">
+        <div class="glass rounded-xl shadow-2xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">Hubungi Salman Mustapa</h2>
+                <button class="modal-close text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <a href="mailto:salmanmustapa@outlook.com" class="flex items-center p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/50 transition">
+                    <i class="fas fa-envelope text-blue-600 dark:text-blue-400 mr-3"></i>
+                    <span>salmanmustapa@outlook.com</span>
+                </a>
+                <a href="https://wa.me/6282154488769?text=Halo,%20saya%20membutuhkan%20bantuan%20untuk%20aplikasi%20Private%20Link." target="_blank" class="flex items-center p-3 bg-green-100 dark:bg-green-900/30 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/50 transition">
+                    <i class="fab fa-whatsapp text-green-600 dark:text-green-400 mr-3"></i>
+                    <span>WhatsApp</span>
                 </a>
             </div>
         </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="hidden fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-md shadow-lg transform transition-transform duration-300 z-50">
+        <span id="toastMessage"></span>
+    </div>
+    <div id="errorToast" class="hidden fixed top-4 right-4 bg-red-600 text-white px-4 py-2 rounded-md shadow-lg transform transition-transform duration-300 z-50">
+        <span id="errorToastMessage"></span>
     </div>
 
     <!-- Non-render-blocking JS -->
