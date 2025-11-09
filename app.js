@@ -365,6 +365,8 @@ async function handleLogin(e) {
     const passphrase = passphraseInput.value;
 
     if (!username || !passphrase) { showLoginError('Isi semua field.'); return; }
+
+    showLoader();
     
     try {
         const accountsData = await fetchSheetData('accounts');
@@ -380,7 +382,7 @@ async function handleLogin(e) {
         }
 
         const headers = accountsData.shift();
-        
+                
         // --- PERBAIKAN KRUSIAL: Validasi dan filter data akun ---
         allAccounts = accountsData.map(row => {
             let acc = {};
@@ -422,6 +424,8 @@ async function handleLogin(e) {
     } catch (error) {
         console.error("Error selama proses login:", error);
         showLoginError('Terjadi kesalahan saat menghubungkan server.');
+    } finally {
+        hideLoader();
     }
 }
 
